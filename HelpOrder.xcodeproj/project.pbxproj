@@ -16,6 +16,12 @@
 		DFD7B2AD17D23B5E000FC8CC /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DFD7B2AC17D23B5E000FC8CC /* Default.png */; };
 		DFD7B2AF17D23B5E000FC8CC /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DFD7B2AE17D23B5E000FC8CC /* Default@2x.png */; };
 		DFD7B2B117D23B5E000FC8CC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DFD7B2B017D23B5E000FC8CC /* Default-568h@2x.png */; };
+		DFD7B2B917D23E28000FC8CC /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFD7B2B817D23E28000FC8CC /* RootViewController.m */; };
+		DFD7B2BC17D23F7A000FC8CC /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFD7B2BB17D23F7A000FC8CC /* OrderViewController.m */; };
+		DFD7B2BF17D23FC5000FC8CC /* CheckTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFD7B2BE17D23FC5000FC8CC /* CheckTableViewController.m */; };
+		DFD7B2C217D24109000FC8CC /* SelectPeopleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFD7B2C117D24109000FC8CC /* SelectPeopleTableViewController.m */; };
+		DFD7B2C517D24166000FC8CC /* SelectRestaurantViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFD7B2C417D24166000FC8CC /* SelectRestaurantViewController.m */; };
+		DFD7B2C817D24233000FC8CC /* SelectPackagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFD7B2C717D24233000FC8CC /* SelectPackagesViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +38,18 @@
 		DFD7B2AC17D23B5E000FC8CC /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		DFD7B2AE17D23B5E000FC8CC /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		DFD7B2B017D23B5E000FC8CC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		DFD7B2B717D23E28000FC8CC /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		DFD7B2B817D23E28000FC8CC /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		DFD7B2BA17D23F7A000FC8CC /* OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderViewController.h; sourceTree = "<group>"; };
+		DFD7B2BB17D23F7A000FC8CC /* OrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderViewController.m; sourceTree = "<group>"; };
+		DFD7B2BD17D23FC5000FC8CC /* CheckTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckTableViewController.h; sourceTree = "<group>"; };
+		DFD7B2BE17D23FC5000FC8CC /* CheckTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckTableViewController.m; sourceTree = "<group>"; };
+		DFD7B2C017D24109000FC8CC /* SelectPeopleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectPeopleTableViewController.h; sourceTree = "<group>"; };
+		DFD7B2C117D24109000FC8CC /* SelectPeopleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectPeopleTableViewController.m; sourceTree = "<group>"; };
+		DFD7B2C317D24166000FC8CC /* SelectRestaurantViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectRestaurantViewController.h; sourceTree = "<group>"; };
+		DFD7B2C417D24166000FC8CC /* SelectRestaurantViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectRestaurantViewController.m; sourceTree = "<group>"; };
+		DFD7B2C617D24233000FC8CC /* SelectPackagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectPackagesViewController.h; sourceTree = "<group>"; };
+		DFD7B2C717D24233000FC8CC /* SelectPackagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectPackagesViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +98,18 @@
 			children = (
 				DFD7B2A917D23B5E000FC8CC /* AppDelegate.h */,
 				DFD7B2AA17D23B5E000FC8CC /* AppDelegate.m */,
+				DFD7B2B717D23E28000FC8CC /* RootViewController.h */,
+				DFD7B2B817D23E28000FC8CC /* RootViewController.m */,
+				DFD7B2BD17D23FC5000FC8CC /* CheckTableViewController.h */,
+				DFD7B2BE17D23FC5000FC8CC /* CheckTableViewController.m */,
+				DFD7B2BA17D23F7A000FC8CC /* OrderViewController.h */,
+				DFD7B2BB17D23F7A000FC8CC /* OrderViewController.m */,
+				DFD7B2C617D24233000FC8CC /* SelectPackagesViewController.h */,
+				DFD7B2C717D24233000FC8CC /* SelectPackagesViewController.m */,
+				DFD7B2C317D24166000FC8CC /* SelectRestaurantViewController.h */,
+				DFD7B2C417D24166000FC8CC /* SelectRestaurantViewController.m */,
+				DFD7B2C017D24109000FC8CC /* SelectPeopleTableViewController.h */,
+				DFD7B2C117D24109000FC8CC /* SelectPeopleTableViewController.m */,
 				DFD7B2A117D23B5E000FC8CC /* Supporting Files */,
 			);
 			path = HelpOrder;
@@ -166,6 +196,12 @@
 			files = (
 				DFD7B2A717D23B5E000FC8CC /* main.m in Sources */,
 				DFD7B2AB17D23B5E000FC8CC /* AppDelegate.m in Sources */,
+				DFD7B2B917D23E28000FC8CC /* RootViewController.m in Sources */,
+				DFD7B2BC17D23F7A000FC8CC /* OrderViewController.m in Sources */,
+				DFD7B2BF17D23FC5000FC8CC /* CheckTableViewController.m in Sources */,
+				DFD7B2C217D24109000FC8CC /* SelectPeopleTableViewController.m in Sources */,
+				DFD7B2C517D24166000FC8CC /* SelectRestaurantViewController.m in Sources */,
+				DFD7B2C817D24233000FC8CC /* SelectPackagesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +314,7 @@
 				DFD7B2B617D23B5E000FC8CC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
