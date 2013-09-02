@@ -8,6 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SelectPeopleTableViewController : UITableViewController
+@protocol SelectPeopleTableViewControllerDelegate <NSObject>
+
+@optional
+
+- (void)selectPeopleName:(NSString *)name;
 
 @end
+
+@interface SelectPeopleTableViewController : UITableViewController <UITableViewDataSource,UITableViewDelegate>
+{
+    NSMutableArray *peopleArray ;
+}
+
+@property (nonatomic,retain) NSMutableArray *peopleArray ;
+@property (nonatomic,assign) id <SelectPeopleTableViewControllerDelegate> delegate;
+
+@end
+

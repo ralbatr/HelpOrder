@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrderViewController.h"
 
-@interface RootViewController : UIViewController
+@interface RootViewController : UIViewController <OrderViewControllerDelegate>
+{
+    NSMutableArray *orderArray;
+}
+
+@property (nonatomic,retain) NSMutableArray *orderArray;
 
 @end

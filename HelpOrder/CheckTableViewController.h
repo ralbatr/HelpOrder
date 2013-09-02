@@ -7,7 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+//#import "OrderViewController.h"
 
 @interface CheckTableViewController : UITableViewController
+
+{
+    NSMutableArray *orderMutableArray;
+    NSArray *sectionArray;
+    NSMutableArray *peopleNoOrderArray;
+}
+
+@property (nonatomic,retain) NSMutableArray *orderMutableArray;
+@property (nonatomic,retain) NSMutableArray *peopleNoOrderArray;
+@property (nonatomic,retain) NSArray *sectionArray;
 
 @end

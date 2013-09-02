@@ -8,6 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SelectRestaurantViewController : UITableViewController
+@protocol SelectRestaurantTableViewControllerDelegate <NSObject>
+
+@optional
+
+- (void)selectRestaurantName:(NSString *)name;
+
+@end
+
+@interface SelectRestaurantViewController : UITableViewController <UITableViewDelegate,UITableViewDataSource>
+{
+    NSMutableArray *restaurantArray;
+}
+
+@property (nonatomic,retain) NSMutableArray *restaurantArray;
+@property (nonatomic,assign) id <SelectRestaurantTableViewControllerDelegate> delegate;
 
 @end

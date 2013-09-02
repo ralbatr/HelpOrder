@@ -8,6 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SelectPackagesViewController : UITableViewController
+@protocol SelectPackagesViewControllerDelegate <NSObject>
+
+@optional
+
+- (void)selectPackagesName:(NSString *)menuName andPrice:(id)price;
+
+@end
+
+@interface SelectPackagesViewController : UITableViewController <UITableViewDataSource,UITableViewDelegate>
+
+{
+    NSMutableArray *packagesNameArray;
+    NSMutableArray *packagesPriceArray;
+}
+
+@property (nonatomic,retain) NSMutableArray *packagesNameArray;
+@property (nonatomic,retain) NSMutableArray *packagesPriceArray;
+@property (nonatomic,assign) id <SelectPackagesViewControllerDelegate> delegate;
 
 @end

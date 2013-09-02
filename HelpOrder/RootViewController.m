@@ -16,6 +16,8 @@
 
 @implementation RootViewController
 
+@synthesize orderArray;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -41,7 +43,7 @@
     checkButton.tag = 201;
     [checkButton addTarget:self action:@selector(checkMethod) forControlEvents:UIControlEventTouchUpInside];
     //初始时，不可以使用查“看订单”按钮
-//    [checkButton setEnabled:NO];
+    [checkButton setEnabled:NO];
     [self.view addSubview:checkButton];
 }
 
@@ -58,7 +60,7 @@
     [self.navigationItem setBackBarButtonItem:backItem];
     [backItem release];
     OrderViewController *orderViewController = [[OrderViewController alloc] init];
-//    orderViewController.delegate = self;
+    orderViewController.delegate = self;
     [self.navigationController pushViewController:orderViewController animated:YES];
     [orderViewController release];
 }
@@ -71,10 +73,20 @@
     [backItem release];
     CheckTableViewController *checkViewController = [[CheckTableViewController alloc] init];
     //    checkViewController.orderMutableArray = self.orderArray;
-//    [checkViewController setOrderMutableArray:self.orderArray];
+    [checkViewController setOrderMutableArray:self.orderArray];
     [self.navigationController pushViewController:checkViewController animated:YES];
     
     [checkViewController release];
+}
+
+#pragma mark - delegate
+- (void)orderDetail:(NSMutableArray *)orderDetail
+{
+    self.orderArray = orderDetail;
+    if ([self.orderArray count] > 0) {
+        UIButton *checkButton = (UIButton *)[self.view viewWithTag:201];
+        [checkButton setEnabled:YES];
+    }
 }
 
 @end

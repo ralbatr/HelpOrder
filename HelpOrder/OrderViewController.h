@@ -7,7 +7,26 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SelectPeopleTableViewController.h"
+#import "SelectRestaurantViewController.h"
+#import "SelectPackagesViewController.h"
 
-@interface OrderViewController : UIViewController <UITextFieldDelegate>
+@protocol OrderViewControllerDelegate <NSObject>
+
+@optional
+
+- (void)orderDetail:(NSMutableArray *)orderDetail;
 
 @end
+
+@interface OrderViewController : UIViewController <SelectPeopleTableViewControllerDelegate,SelectRestaurantTableViewControllerDelegate,SelectPackagesViewControllerDelegate,UITextFieldDelegate>
+
+{
+    NSMutableArray *orderArray;
+}
+
+@property (nonatomic,retain) NSMutableArray *orderArray;
+@property (nonatomic,assign) id <OrderViewControllerDelegate> delegate;
+
+@end
+
