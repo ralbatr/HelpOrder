@@ -52,6 +52,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc
+{
+    [peopleArray release];
+    [super dealloc];
+}
+
 #pragma mark - 自定义的方法
 //隐藏ViewTable的白线
 -(void)setExtraCellLineHidden: (UITableView *)tableView

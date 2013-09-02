@@ -48,15 +48,15 @@
     int allPeopleLength = [AllPeopleNameArray count];
     int orderPeopleLength = [self.orderMutableArray count];
     int OrderCount = orderPeopleLength;
+    
+//    [AllPeopleNameArray removeObjectsInArray:self.orderMutableArray];
     for (int i = 0; i < allPeopleLength; i++) {
         for (int j= 0; j < orderPeopleLength; j++) {
-            OrderDetail *orderDetail = [[OrderDetail alloc] init];
+            OrderDetail *orderDetail = [[OrderDetail alloc] autorelease];
             orderDetail = [self.orderMutableArray objectAtIndex:j];
             //找到已经订餐人，从全部数组种删除，剩下即为没有订餐的人
             NSString *name1= [NSString stringWithFormat:@"%@",[[AllPeopleNameArray objectAtIndex:i]objectForKey:@"name" ]];
             NSString *name2= [NSString stringWithFormat:@"%@",orderDetail.peopleName];
-            //            NSLog(@"%@ %@",name1,name2);
-            
             if ([name1 isEqualToString:name2]) {
                 [self.peopleNoOrderArray removeObjectAtIndex:i];
                 OrderCount--;
@@ -66,6 +66,13 @@
                 }
             }
         }
+    }
+    
+    float totalPrice =  0;
+    for (int j= 0; j < orderPeopleLength; j++) {
+        OrderDetail *orderDetail = [[OrderDetail alloc] autorelease];
+        orderDetail = [self.orderMutableArray objectAtIndex:j];
+        totalPrice += [orderDetail.price floatValue];
     }
     
     //    [self.navigationController setToolbarHidden:NO];
@@ -83,7 +90,7 @@
     statusLabel.backgroundColor = [UIColor clearColor];
     statusLabel.font = [UIFont boldSystemFontOfSize:18];
     //    NSString *statusString = [[NSString stringWithFormat:@"%d人已定，%d人未定",orderPeopleLength,allPeopleLength - orderPeopleLength];
-    NSString *statusString = [NSString stringWithFormat:@"%d人已定,%d人未定",orderPeopleLength,allPeopleLength - orderPeopleLength];
+    NSString *statusString = [NSString stringWithFormat:@"%d人已定,%d人未定,总计%.2f元",orderPeopleLength,allPeopleLength - orderPeopleLength,totalPrice];
     statusLabel.text = statusString;
     statusLabel.tag = 301;
     [self.view addSubview:statusLabel];
@@ -96,6 +103,14 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    [orderMutableArray release];
+    [peopleNoOrderArray release];
+    [sectionArray release];
+    [super dealloc];
 }
 
 #pragma mark - 自定义方法
@@ -141,7 +156,7 @@
     
     // Configure the cell...
     if (section == 0) {
-        OrderDetail *orderDatil = [[OrderDetail alloc] init];
+        OrderDetail *orderDatil = [[OrderDetail alloc] autorelease];
         orderDatil = [self.orderMutableArray objectAtIndex:row];
         
         CGRect nameLabelRect = CGRectMake(3, 5, 150, 18);

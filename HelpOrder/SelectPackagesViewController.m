@@ -54,8 +54,8 @@
 
 - (void)didReceiveMemoryWarning
 {
-    [self.packagesPriceArray release];
-    [self.packagesNameArray release];
+    [packagesPriceArray release];
+    [packagesNameArray release];
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

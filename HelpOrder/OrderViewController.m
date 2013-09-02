@@ -8,6 +8,7 @@
 
 #import "OrderViewController.h"
 #import "OrderDetail.h"
+#import "SBJson.h"
 
 @interface OrderViewController ()
 
@@ -203,21 +204,39 @@
     NSString *restaurantNameString = restaurantTextField.text;
     NSString *priceString = priceLabel.text;
     
-    // 查看 数组中 是否这个人 已经订餐
-    int length = [self.orderArray count];
-    for (int i = 0;i < length;i++) {
-        OrderDetail *orderDtail = [[[OrderDetail alloc] init] autorelease];
-        orderDtail = [self.orderArray objectAtIndex:i];
-        //当这个人已经订餐，删除原来的
-        if ([orderDtail.peopleName isEqualToString:personNameString]) {
-            [self.orderArray removeObjectAtIndex:i];
-            i = [self.orderArray count];
+    //读取订单 orderDetail.json
+    NSString *userPath = [[NSBundle mainBundle] pathForResource:@"orderDetail" ofType:@"json"];
+    NSString *jsonString = [NSString stringWithContentsOfFile:userPath encoding:NSUTF8StringEncoding error:NULL];
+    
+    if (jsonString != nil) {
+        SBJsonParser * parser = [[SBJsonParser alloc] init];
+        NSError * error = nil;
+        NSMutableArray *orderDetailArray = [parser objectWithString:jsonString error:&error];
+        
+        int orderlength = [orderDetailArray count];
+        for (int i = 0; i < orderlength; i++) {
+            [self.orderArray addObject:[[orderDetailArray objectAtIndex:i] objectForKey:@"name"]];
+            NSLog(@"orderPeople name is %@",[[orderDetailArray objectAtIndex:i] objectForKey:@"name"]);
+        }
+        // 查看 数组中 是否这个人 已经订餐
+        int length = [self.orderArray count];
+        for (int i = 0;i < length;i++) {
+            OrderDetail *orderDtail = [[[OrderDetail alloc] init] autorelease];
+            orderDtail = [self.orderArray objectAtIndex:i];
+            //当这个人已经订餐，删除原来的
+            if ([orderDtail.peopleName isEqualToString:personNameString]) {
+                [self.orderArray removeObjectAtIndex:i];
+                i = [self.orderArray count];
+            }
         }
     }
+    
     //把这个人的信息，写到数组中
     OrderDetail *orderDetail = [[OrderDetail alloc] initWithPeopleName:personNameString andRestaurantName:restaurantNameString andPackagesName:packagesNameString andPrice:priceString];
     [orderArray addObject:orderDetail];
     [orderDetail release];
+    
+    [orderArray writeToFile:userPath atomically:YES];
     
     //清空人名选择和套餐选择输入框
     nameTextField.text = @"";

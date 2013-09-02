@@ -79,6 +79,12 @@
     [checkViewController release];
 }
 
+- (void)dealloc
+{
+    [orderArray release];
+    [super dealloc];
+}
+
 #pragma mark - delegate
 - (void)orderDetail:(NSMutableArray *)orderDetail
 {

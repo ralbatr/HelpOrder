@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DF09B9D417D25F6700DC2532 /* OrderDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = DF09B9D317D25F6700DC2532 /* OrderDetail.m */; };
+		DFD0D19C17D4D3A9009724BC /* orderDetail.json in Resources */ = {isa = PBXBuildFile; fileRef = DFD0D19B17D4D3A9009724BC /* orderDetail.json */; };
 		DFD7B29B17D23B5E000FC8CC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFD7B29A17D23B5E000FC8CC /* UIKit.framework */; };
 		DFD7B29D17D23B5E000FC8CC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFD7B29C17D23B5E000FC8CC /* Foundation.framework */; };
 		DFD7B29F17D23B5E000FC8CC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFD7B29E17D23B5E000FC8CC /* CoreGraphics.framework */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		DF09B9D217D25F6700DC2532 /* OrderDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderDetail.h; path = ../OrderDetail.h; sourceTree = "<group>"; };
 		DF09B9D317D25F6700DC2532 /* OrderDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderDetail.m; path = ../OrderDetail.m; sourceTree = "<group>"; };
+		DFD0D19B17D4D3A9009724BC /* orderDetail.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = orderDetail.json; sourceTree = "<group>"; };
 		DFD7B29717D23B5E000FC8CC /* HelpOrder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelpOrder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFD7B29A17D23B5E000FC8CC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DFD7B29C17D23B5E000FC8CC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -184,6 +186,7 @@
 			children = (
 				DFE9590F17D2535400E2E4D0 /* restaurants.json */,
 				DFE9591017D2535400E2E4D0 /* foods.json */,
+				DFD0D19B17D4D3A9009724BC /* orderDetail.json */,
 				DFE9591117D2535400E2E4D0 /* users.json */,
 			);
 			name = Data;
@@ -280,6 +283,7 @@
 				DFE9591217D2535400E2E4D0 /* restaurants.json in Resources */,
 				DFE9591317D2535400E2E4D0 /* foods.json in Resources */,
 				DFE9591417D2535400E2E4D0 /* users.json in Resources */,
+				DFD0D19C17D4D3A9009724BC /* orderDetail.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
