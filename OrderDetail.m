@@ -29,10 +29,10 @@
 
 - (void)dealloc
 {
-    [self.peopleName release];
-    [self.restaurantName release];
-    [self.price release];
-    [self.packagesName release];
+    [peopleName release];
+    [restaurantName release];
+    [price release];
+    [packagesName release];
     [super dealloc];
 }
 

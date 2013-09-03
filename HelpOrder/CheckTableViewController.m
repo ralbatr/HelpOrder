@@ -50,7 +50,8 @@
     int OrderCount = orderPeopleLength;
     
 //    [AllPeopleNameArray removeObjectsInArray:self.orderMutableArray];
-    for (int i = 0; i < allPeopleLength; i++) {
+    
+    for (int i = 0; i < [AllPeopleNameArray count]; i++) {
         for (int j= 0; j < orderPeopleLength; j++) {
             OrderDetail *orderDetail = [[OrderDetail alloc] autorelease];
             orderDetail = [self.orderMutableArray objectAtIndex:j];
@@ -64,9 +65,17 @@
                     i = allPeopleLength;
                     j = orderPeopleLength;
                 }
+                break;
             }
+//            allPeopleLength = [AllPeopleNameArray count];
         }
     }
+    
+    //获取 没有订餐的人的 名单
+//    if ([peopleNoOrderArray containsObject:orderMutableArray]) {
+//        [peopleNoOrderArray removeObjectsInArray:orderMutableArray];
+//    }
+    
     
     float totalPrice =  0;
     for (int j= 0; j < orderPeopleLength; j++) {
@@ -176,10 +185,17 @@
         
         CGRect priceLabelRect = CGRectMake(230, 5, 70, 15);
         UILabel *priceLabel = [[UILabel alloc] initWithFrame:priceLabelRect];
-        NSString *price = [NSString stringWithFormat:@"¥ %@",orderDatil.price];
+        NSString *price = [NSString stringWithFormat:@"¥ %.2f",[orderDatil.price floatValue]];
         priceLabel.text = price;
         if ( [orderDatil.price intValue] > 12 ) {
             priceLabel.textColor = [UIColor redColor];
+            CGRect exceedPriceLabelRect = CGRectMake(230, 25, 70, 15);
+            UILabel *exceedPriceLabel = [[UILabel alloc] initWithFrame:exceedPriceLabelRect];
+            NSString *exceedPrice = [NSString stringWithFormat:@"¥ %.2f",[orderDatil.price floatValue] - 12];
+            exceedPriceLabel.text = exceedPrice;
+            exceedPriceLabel.textColor = [UIColor redColor];
+            exceedPriceLabel.font = [UIFont boldSystemFontOfSize:14];
+            [cell.contentView addSubview:exceedPriceLabel];
         }
         priceLabel.font = [UIFont boldSystemFontOfSize:14];
         [cell.contentView addSubview:priceLabel];

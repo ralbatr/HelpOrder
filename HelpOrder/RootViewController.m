@@ -45,6 +45,24 @@
     //初始时，不可以使用查“看订单”按钮
     [checkButton setEnabled:NO];
     [self.view addSubview:checkButton];
+    //如果，没有订单，把之前的点菜列表删除
+    if ([self.orderArray count] == 0) {
+        //要往沙盒中写数据获取的沙盒目录
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *plistPath=[paths objectAtIndex:0];
+        
+        //取得完整的文件名
+        NSString *fileName=[plistPath stringByAppendingPathComponent:@"orderDetail.json"];
+        NSLog(@"fileName is : %@",fileName);
+        //删除这个文件
+        NSString *value = @"";
+        //创建并写入文件
+        [value writeToFile:fileName atomically:YES encoding:NSUTF8StringEncoding error:nil];
+        //检查是否写入
+        //    NSString *writeData=[[NSString alloc]initWithContentsOfFile:fileName];
+        NSString *writeData = [[NSString alloc] initWithContentsOfFile:fileName encoding:NSUTF8StringEncoding error:nil];
+        NSLog(@"write data is :%@",writeData);
+    }
 }
 
 - (void)didReceiveMemoryWarning

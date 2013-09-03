@@ -204,19 +204,33 @@
     NSString *restaurantNameString = restaurantTextField.text;
     NSString *priceString = priceLabel.text;
     
-    //读取订单 orderDetail.json
-    NSString *userPath = [[NSBundle mainBundle] pathForResource:@"orderDetail" ofType:@"json"];
-    NSString *jsonString = [NSString stringWithContentsOfFile:userPath encoding:NSUTF8StringEncoding error:NULL];
+    //要往沙盒中写数据获取的沙盒目录
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *plistPath=[paths objectAtIndex:0];
     
-    if (jsonString != nil) {
+    //取得完整的文件名
+    NSString *fileName=[plistPath stringByAppendingPathComponent:@"orderDetail.json"];
+    NSLog(@"fileName is : %@",fileName);
+    
+    NSString *writeData = [[NSString alloc] initWithContentsOfFile:fileName encoding:NSUTF8StringEncoding error:nil];
+    NSLog(@"write data is :%@",writeData);
+    
+    if (![writeData isEqual: @""]) {
         SBJsonParser * parser = [[SBJsonParser alloc] init];
         NSError * error = nil;
-        NSMutableArray *orderDetailArray = [parser objectWithString:jsonString error:&error];
+        NSMutableArray *orderDetailArray = [parser objectWithString:writeData error:&error];
         
+        //获取 订单的数组 orderAttay
         int orderlength = [orderDetailArray count];
         for (int i = 0; i < orderlength; i++) {
-            [self.orderArray addObject:[[orderDetailArray objectAtIndex:i] objectForKey:@"name"]];
-            NSLog(@"orderPeople name is %@",[[orderDetailArray objectAtIndex:i] objectForKey:@"name"]);
+            NSLog(@"orderPeople name is %@",[[orderDetailArray objectAtIndex:i] objectForKey:@"PeopleName"]);
+            
+            OrderDetail *orderDetailAdd = [[OrderDetail alloc] init];
+            orderDetailAdd.peopleName = [[orderDetailArray objectAtIndex:i] objectForKey:@"PeopleName"];
+            orderDetailAdd.packagesName = [[orderDetailArray objectAtIndex:i] objectForKey:@"PackagesName"];
+            orderDetailAdd.restaurantName = [[orderDetailArray objectAtIndex:i] objectForKey:@"RestaurantName"];
+            orderDetailAdd.price = [[orderDetailArray objectAtIndex:i] objectForKey:@"price"];
+            [self.orderArray addObject:orderDetailAdd];
         }
         // 查看 数组中 是否这个人 已经订餐
         int length = [self.orderArray count];
@@ -234,10 +248,34 @@
     //把这个人的信息，写到数组中
     OrderDetail *orderDetail = [[OrderDetail alloc] initWithPeopleName:personNameString andRestaurantName:restaurantNameString andPackagesName:packagesNameString andPrice:priceString];
     [orderArray addObject:orderDetail];
-    [orderDetail release];
     
-    [orderArray writeToFile:userPath atomically:YES];
+    //把数组重新写到 orderDetail.json
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    int orderLength = [orderArray count];
+    for (int i = 0 ; i < orderLength ; i++) {
+        OrderDetail *orderDetailWrite = [[OrderDetail alloc] init];
+        orderDetailWrite = [orderArray objectAtIndex:i];
+        NSDictionary *dictonary = [[NSMutableDictionary alloc] init];
+        [dictonary setValue:orderDetailWrite.peopleName forKey:@"PeopleName"];
+        [dictonary setValue:orderDetailWrite.restaurantName forKey:@"RestaurantName"];
+        [dictonary setValue:orderDetailWrite.packagesName forKey:@"PackagesName"];
+        [dictonary setValue:orderDetailWrite.price forKey:@"price"];
+        
+        [array addObject:dictonary];
+        [orderDetailWrite release];
+    }
+    //转换json格式
+    SBJsonWriter *writer = [[SBJsonWriter alloc] init];
+    NSLog(@"Start Create JSON!");
+    NSString *value = [writer stringWithObject:array];
+    NSLog(@"%@",value);
     
+    //创建并写入文件
+    [value writeToFile:fileName atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    //检查是否写入
+    NSString *writeData1 = [[NSString alloc] initWithContentsOfFile:fileName encoding:NSUTF8StringEncoding error:nil];
+    NSLog(@"write data is :%@",writeData1);
+
     //清空人名选择和套餐选择输入框
     nameTextField.text = @"";
     packagesNameTextField.text = @"";
@@ -249,6 +287,11 @@
     if ([self.delegate respondsToSelector:@selector(orderDetail:)]) {
         [self.delegate orderDetail:orderArray];
     }
+}
+//关闭软键盘
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [self.view endEditing:YES];
 }
 
 #pragma mark - delegate
