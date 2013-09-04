@@ -220,7 +220,10 @@
         NSError * error = nil;
         NSMutableArray *orderDetailArray = [parser objectWithString:writeData error:&error];
         
-        //获取 订单的数组 orderAttay
+        //获取 订单的数组 orderArray
+        
+        //先清空之前 数据， 防止连续两次添加
+        [orderArray removeAllObjects];
         int orderlength = [orderDetailArray count];
         for (int i = 0; i < orderlength; i++) {
             NSLog(@"orderPeople name is %@",[[orderDetailArray objectAtIndex:i] objectForKey:@"PeopleName"]);
@@ -286,6 +289,7 @@
     //调用代理
     if ([self.delegate respondsToSelector:@selector(orderDetail:)]) {
         [self.delegate orderDetail:orderArray];
+        
     }
 }
 //关闭软键盘

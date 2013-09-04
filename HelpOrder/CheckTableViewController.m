@@ -47,35 +47,14 @@
     self.peopleNoOrderArray = AllPeopleNameArray;
     int allPeopleLength = [AllPeopleNameArray count];
     int orderPeopleLength = [self.orderMutableArray count];
-    int OrderCount = orderPeopleLength;
-    
-//    [AllPeopleNameArray removeObjectsInArray:self.orderMutableArray];
-    
-    for (int i = 0; i < [AllPeopleNameArray count]; i++) {
-        for (int j= 0; j < orderPeopleLength; j++) {
-            OrderDetail *orderDetail = [[OrderDetail alloc] autorelease];
-            orderDetail = [self.orderMutableArray objectAtIndex:j];
-            //找到已经订餐人，从全部数组种删除，剩下即为没有订餐的人
-            NSString *name1= [NSString stringWithFormat:@"%@",[[AllPeopleNameArray objectAtIndex:i]objectForKey:@"name" ]];
-            NSString *name2= [NSString stringWithFormat:@"%@",orderDetail.peopleName];
-            if ([name1 isEqualToString:name2]) {
-                [self.peopleNoOrderArray removeObjectAtIndex:i];
-                OrderCount--;
-                if (OrderCount == 0) {
-                    i = allPeopleLength;
-                    j = orderPeopleLength;
-                }
-                break;
-            }
-//            allPeopleLength = [AllPeopleNameArray count];
-        }
-    }
-    
-    //获取 没有订餐的人的 名单
-//    if ([peopleNoOrderArray containsObject:orderMutableArray]) {
-//        [peopleNoOrderArray removeObjectsInArray:orderMutableArray];
-//    }
-    
+
+    for (int i = 0; i < orderPeopleLength; i++) {
+        OrderDetail *orderDetail = [[OrderDetail alloc] autorelease];
+        orderDetail = [self.orderMutableArray objectAtIndex:i];
+        NSDictionary *dic = [NSDictionary dictionaryWithObject:orderDetail.peopleName forKey:@"name"];
+        [peopleNoOrderArray removeObject:dic];
+        NSLog(@"%@",orderDetail.peopleName);
+    }    
     
     float totalPrice =  0;
     for (int j= 0; j < orderPeopleLength; j++) {
@@ -201,6 +180,7 @@
         [cell.contentView addSubview:priceLabel];
         [priceLabel release];
     }
+    //没有订餐的人 
     if (section == 1) {
         NSLog(@"%@",[[self.peopleNoOrderArray objectAtIndex:row] objectForKey:@"name"]);
         cell.textLabel.text = [[self.peopleNoOrderArray objectAtIndex:row] objectForKey:@"name"];

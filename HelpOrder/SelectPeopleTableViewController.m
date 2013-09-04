@@ -88,7 +88,7 @@
     NSUInteger row = [indexPath row];
     cell.textLabel.text = [self.peopleArray objectAtIndex:row];
     cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-    NSLog(@"%@",[self.peopleArray objectAtIndex:row]);
+//    NSLog(@"%@",[self.peopleArray objectAtIndex:row]);
     return cell;
 }
 
