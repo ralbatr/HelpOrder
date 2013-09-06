@@ -10,4 +10,7 @@
 
 @interface SelectPackages : UIView
 
+- (id)initWithFrame:(CGRect)frame andName:(NSString *)name andPrice:(NSString *)price;
+- (void)showSelectPackesViewWithName:(NSString *)name andPrice:(NSString *)price;
+
 @end

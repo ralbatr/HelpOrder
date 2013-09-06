@@ -8,6 +8,7 @@
 
 #import "SelectPeopleTableViewController.h"
 #import "SBJson.h"
+#import "ReadJson.h"
 
 @interface SelectPeopleTableViewController ()
 
@@ -30,13 +31,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    NSString *userPath = [[NSBundle mainBundle] pathForResource:@"users" ofType:@"json"];
-    NSString *jsonString = [NSString stringWithContentsOfFile:userPath encoding:NSUTF8StringEncoding error:NULL];
     
-    SBJsonParser * parser = [[SBJsonParser alloc] init];
-    NSError * error = nil;
-    NSMutableArray *peopleArray1 = [parser objectWithString:jsonString error:&error];
+    ReadJson *readJson = [[ReadJson alloc] init];
+    NSMutableArray *peopleArray1 = [readJson readJosonwithFileName:@"users"];
     
     int length = [peopleArray1 count];
     for (int i = 0; i < length; i++) {
@@ -49,14 +46,8 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc
-{
-    [peopleArray release];
-    [super dealloc];
-}
 
 #pragma mark - 自定义的方法
 //隐藏ViewTable的白线
@@ -65,7 +56,6 @@
     UIView *view = [UIView new];
     view.backgroundColor = [UIColor clearColor];
     [tableView setTableFooterView:view];
-    [view release];
 }
 
 #pragma mark - Table view data source
@@ -81,14 +71,12 @@
     static NSString *PeopleCell = @"PeopleCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:PeopleCell];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:PeopleCell] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:PeopleCell];
     }
-    
-    // Configure the cell...
+
     NSUInteger row = [indexPath row];
     cell.textLabel.text = [self.peopleArray objectAtIndex:row];
     cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-//    NSLog(@"%@",[self.peopleArray objectAtIndex:row]);
     return cell;
 }
 

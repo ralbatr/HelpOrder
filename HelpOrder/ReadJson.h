@@ -10,4 +10,8 @@
 
 @interface ReadJson : NSObject
 
+- (id)readJosonwithFileName:(NSString *)fileName;
+
+- (void)writeJsonWithJsonName:(NSString *)jsonName andValue:(NSString *)string;
+
 @end

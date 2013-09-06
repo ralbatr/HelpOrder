@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		DF09B9D417D25F6700DC2532 /* OrderDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = DF09B9D317D25F6700DC2532 /* OrderDetail.m */; };
+		DF50728817D8D14B0002DDC5 /* SelectPackages.m in Sources */ = {isa = PBXBuildFile; fileRef = DF50728717D8D14B0002DDC5 /* SelectPackages.m */; };
+		DF8B295117D79E3D00E14E0B /* ReadJson.m in Sources */ = {isa = PBXBuildFile; fileRef = DF8B295017D79E3D00E14E0B /* ReadJson.m */; };
+		DF9F7B9317D78DE70065225A /* RootView.m in Sources */ = {isa = PBXBuildFile; fileRef = DF9F7B9217D78DE70065225A /* RootView.m */; };
+		DFBC694117D7A910002D56EC /* CheckTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = DFBC694017D7A910002D56EC /* CheckTableView.m */; };
 		DFD0D19C17D4D3A9009724BC /* orderDetail.json in Resources */ = {isa = PBXBuildFile; fileRef = DFD0D19B17D4D3A9009724BC /* orderDetail.json */; };
 		DFD7B29B17D23B5E000FC8CC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFD7B29A17D23B5E000FC8CC /* UIKit.framework */; };
 		DFD7B29D17D23B5E000FC8CC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFD7B29C17D23B5E000FC8CC /* Foundation.framework */; };
@@ -24,6 +28,7 @@
 		DFD7B2C217D24109000FC8CC /* SelectPeopleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFD7B2C117D24109000FC8CC /* SelectPeopleTableViewController.m */; };
 		DFD7B2C517D24166000FC8CC /* SelectRestaurantViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFD7B2C417D24166000FC8CC /* SelectRestaurantViewController.m */; };
 		DFD7B2C817D24233000FC8CC /* SelectPackagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFD7B2C717D24233000FC8CC /* SelectPackagesViewController.m */; };
+		DFDA15FF17D7986B0062838B /* OrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = DFDA15FE17D7986B0062838B /* OrderView.m */; };
 		DFE9591217D2535400E2E4D0 /* restaurants.json in Resources */ = {isa = PBXBuildFile; fileRef = DFE9590F17D2535400E2E4D0 /* restaurants.json */; };
 		DFE9591317D2535400E2E4D0 /* foods.json in Resources */ = {isa = PBXBuildFile; fileRef = DFE9591017D2535400E2E4D0 /* foods.json */; };
 		DFE9591417D2535400E2E4D0 /* users.json in Resources */ = {isa = PBXBuildFile; fileRef = DFE9591117D2535400E2E4D0 /* users.json */; };
@@ -44,6 +49,14 @@
 /* Begin PBXFileReference section */
 		DF09B9D217D25F6700DC2532 /* OrderDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderDetail.h; path = ../OrderDetail.h; sourceTree = "<group>"; };
 		DF09B9D317D25F6700DC2532 /* OrderDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderDetail.m; path = ../OrderDetail.m; sourceTree = "<group>"; };
+		DF50728617D8D14B0002DDC5 /* SelectPackages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectPackages.h; sourceTree = "<group>"; };
+		DF50728717D8D14B0002DDC5 /* SelectPackages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectPackages.m; sourceTree = "<group>"; };
+		DF8B294F17D79E3D00E14E0B /* ReadJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadJson.h; sourceTree = "<group>"; };
+		DF8B295017D79E3D00E14E0B /* ReadJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadJson.m; sourceTree = "<group>"; };
+		DF9F7B9117D78DE70065225A /* RootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootView.h; sourceTree = "<group>"; };
+		DF9F7B9217D78DE70065225A /* RootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootView.m; sourceTree = "<group>"; };
+		DFBC693F17D7A910002D56EC /* CheckTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CheckTableView.h; path = HelpOrder/CheckTableView.h; sourceTree = "<group>"; };
+		DFBC694017D7A910002D56EC /* CheckTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CheckTableView.m; path = HelpOrder/CheckTableView.m; sourceTree = "<group>"; };
 		DFD0D19B17D4D3A9009724BC /* orderDetail.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = orderDetail.json; sourceTree = "<group>"; };
 		DFD7B29717D23B5E000FC8CC /* HelpOrder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelpOrder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFD7B29A17D23B5E000FC8CC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -58,18 +71,20 @@
 		DFD7B2AC17D23B5E000FC8CC /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		DFD7B2AE17D23B5E000FC8CC /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		DFD7B2B017D23B5E000FC8CC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		DFD7B2B717D23E28000FC8CC /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
-		DFD7B2B817D23E28000FC8CC /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		DFD7B2BA17D23F7A000FC8CC /* OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderViewController.h; sourceTree = "<group>"; };
-		DFD7B2BB17D23F7A000FC8CC /* OrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderViewController.m; sourceTree = "<group>"; };
-		DFD7B2BD17D23FC5000FC8CC /* CheckTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckTableViewController.h; sourceTree = "<group>"; };
-		DFD7B2BE17D23FC5000FC8CC /* CheckTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckTableViewController.m; sourceTree = "<group>"; };
+		DFD7B2B717D23E28000FC8CC /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootViewController.h; path = HelpOrder/RootViewController.h; sourceTree = "<group>"; };
+		DFD7B2B817D23E28000FC8CC /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootViewController.m; path = HelpOrder/RootViewController.m; sourceTree = "<group>"; };
+		DFD7B2BA17D23F7A000FC8CC /* OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderViewController.h; path = HelpOrder/OrderViewController.h; sourceTree = "<group>"; };
+		DFD7B2BB17D23F7A000FC8CC /* OrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderViewController.m; path = HelpOrder/OrderViewController.m; sourceTree = "<group>"; };
+		DFD7B2BD17D23FC5000FC8CC /* CheckTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CheckTableViewController.h; path = HelpOrder/CheckTableViewController.h; sourceTree = "<group>"; };
+		DFD7B2BE17D23FC5000FC8CC /* CheckTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CheckTableViewController.m; path = HelpOrder/CheckTableViewController.m; sourceTree = "<group>"; };
 		DFD7B2C017D24109000FC8CC /* SelectPeopleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectPeopleTableViewController.h; sourceTree = "<group>"; };
 		DFD7B2C117D24109000FC8CC /* SelectPeopleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectPeopleTableViewController.m; sourceTree = "<group>"; };
 		DFD7B2C317D24166000FC8CC /* SelectRestaurantViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectRestaurantViewController.h; sourceTree = "<group>"; };
 		DFD7B2C417D24166000FC8CC /* SelectRestaurantViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectRestaurantViewController.m; sourceTree = "<group>"; };
-		DFD7B2C617D24233000FC8CC /* SelectPackagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectPackagesViewController.h; sourceTree = "<group>"; };
-		DFD7B2C717D24233000FC8CC /* SelectPackagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectPackagesViewController.m; sourceTree = "<group>"; };
+		DFD7B2C617D24233000FC8CC /* SelectPackagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectPackagesViewController.h; path = HelpOrder/SelectPackagesViewController.h; sourceTree = "<group>"; };
+		DFD7B2C717D24233000FC8CC /* SelectPackagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelectPackagesViewController.m; path = HelpOrder/SelectPackagesViewController.m; sourceTree = "<group>"; };
+		DFDA15FD17D7986B0062838B /* OrderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderView.h; path = HelpOrder/OrderView.h; sourceTree = "<group>"; };
+		DFDA15FE17D7986B0062838B /* OrderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderView.m; path = HelpOrder/OrderView.m; sourceTree = "<group>"; };
 		DFE9590F17D2535400E2E4D0 /* restaurants.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = restaurants.json; sourceTree = "<group>"; };
 		DFE9591017D2535400E2E4D0 /* foods.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = foods.json; sourceTree = "<group>"; };
 		DFE9591117D2535400E2E4D0 /* users.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = users.json; sourceTree = "<group>"; };
@@ -114,9 +129,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DF50728517D8D1210002DDC5 /* SelectPackagesView */ = {
+			isa = PBXGroup;
+			children = (
+				DFD7B2C617D24233000FC8CC /* SelectPackagesViewController.h */,
+				DFD7B2C717D24233000FC8CC /* SelectPackagesViewController.m */,
+				DF50728617D8D14B0002DDC5 /* SelectPackages.h */,
+				DF50728717D8D14B0002DDC5 /* SelectPackages.m */,
+			);
+			name = SelectPackagesView;
+			sourceTree = "<group>";
+		};
+		DF8B294E17D79E0600E14E0B /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				DF09B9D217D25F6700DC2532 /* OrderDetail.h */,
+				DF09B9D317D25F6700DC2532 /* OrderDetail.m */,
+				DF8B294F17D79E3D00E14E0B /* ReadJson.h */,
+				DF8B295017D79E3D00E14E0B /* ReadJson.m */,
+			);
+			name = Other;
+			path = HelpOrder;
+			sourceTree = "<group>";
+		};
+		DFBC694217D7A918002D56EC /* CheckTableView */ = {
+			isa = PBXGroup;
+			children = (
+				DFD7B2BD17D23FC5000FC8CC /* CheckTableViewController.h */,
+				DFD7B2BE17D23FC5000FC8CC /* CheckTableViewController.m */,
+				DFBC693F17D7A910002D56EC /* CheckTableView.h */,
+				DFBC694017D7A910002D56EC /* CheckTableView.m */,
+			);
+			name = CheckTableView;
+			sourceTree = "<group>";
+		};
 		DFD7B28E17D23B5E000FC8CC = {
 			isa = PBXGroup;
 			children = (
+				DF50728517D8D1210002DDC5 /* SelectPackagesView */,
+				DFBC694217D7A918002D56EC /* CheckTableView */,
+				DFDA160017D798830062838B /* OrderViewController */,
+				DFDA15FC17D797A40062838B /* RootViewController */,
+				DF8B294E17D79E0600E14E0B /* Other */,
 				DFD7B2A017D23B5E000FC8CC /* HelpOrder */,
 				DFD7B29917D23B5E000FC8CC /* Frameworks */,
 				DFD7B29817D23B5E000FC8CC /* Products */,
@@ -146,16 +200,6 @@
 			children = (
 				DFD7B2A917D23B5E000FC8CC /* AppDelegate.h */,
 				DFD7B2AA17D23B5E000FC8CC /* AppDelegate.m */,
-				DF09B9D217D25F6700DC2532 /* OrderDetail.h */,
-				DF09B9D317D25F6700DC2532 /* OrderDetail.m */,
-				DFD7B2B717D23E28000FC8CC /* RootViewController.h */,
-				DFD7B2B817D23E28000FC8CC /* RootViewController.m */,
-				DFD7B2BD17D23FC5000FC8CC /* CheckTableViewController.h */,
-				DFD7B2BE17D23FC5000FC8CC /* CheckTableViewController.m */,
-				DFD7B2BA17D23F7A000FC8CC /* OrderViewController.h */,
-				DFD7B2BB17D23F7A000FC8CC /* OrderViewController.m */,
-				DFD7B2C617D24233000FC8CC /* SelectPackagesViewController.h */,
-				DFD7B2C717D24233000FC8CC /* SelectPackagesViewController.m */,
 				DFD7B2C317D24166000FC8CC /* SelectRestaurantViewController.h */,
 				DFD7B2C417D24166000FC8CC /* SelectRestaurantViewController.m */,
 				DFD7B2C017D24109000FC8CC /* SelectPeopleTableViewController.h */,
@@ -179,6 +223,28 @@
 				DFD7B2B017D23B5E000FC8CC /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DFDA15FC17D797A40062838B /* RootViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DF9F7B9117D78DE70065225A /* RootView.h */,
+				DF9F7B9217D78DE70065225A /* RootView.m */,
+				DFD7B2B717D23E28000FC8CC /* RootViewController.h */,
+				DFD7B2B817D23E28000FC8CC /* RootViewController.m */,
+			);
+			name = RootViewController;
+			sourceTree = "<group>";
+		};
+		DFDA160017D798830062838B /* OrderViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DFD7B2BA17D23F7A000FC8CC /* OrderViewController.h */,
+				DFD7B2BB17D23F7A000FC8CC /* OrderViewController.m */,
+				DFDA15FD17D7986B0062838B /* OrderView.h */,
+				DFDA15FE17D7986B0062838B /* OrderView.m */,
+			);
+			name = OrderViewController;
 			sourceTree = "<group>";
 		};
 		DFE9590E17D2532F00E2E4D0 /* Data */ = {
@@ -315,6 +381,11 @@
 				DFE9593917D2539300E2E4D0 /* SBJsonUTF8Stream.m in Sources */,
 				DFE9593A17D2539300E2E4D0 /* SBJsonWriter.m in Sources */,
 				DF09B9D417D25F6700DC2532 /* OrderDetail.m in Sources */,
+				DF9F7B9317D78DE70065225A /* RootView.m in Sources */,
+				DFDA15FF17D7986B0062838B /* OrderView.m in Sources */,
+				DF8B295117D79E3D00E14E0B /* ReadJson.m in Sources */,
+				DFBC694117D7A910002D56EC /* CheckTableView.m in Sources */,
+				DF50728817D8D14B0002DDC5 /* SelectPackages.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,6 +409,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
@@ -368,6 +440,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
@@ -389,6 +462,7 @@
 		DFD7B2B517D23B5E000FC8CC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HelpOrder/HelpOrder-Prefix.pch";
 				INFOPLIST_FILE = "HelpOrder/HelpOrder-Info.plist";
@@ -400,6 +474,7 @@
 		DFD7B2B617D23B5E000FC8CC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HelpOrder/HelpOrder-Prefix.pch";
 				INFOPLIST_FILE = "HelpOrder/HelpOrder-Info.plist";

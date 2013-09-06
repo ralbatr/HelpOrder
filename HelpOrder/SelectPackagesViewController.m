@@ -8,6 +8,8 @@
 
 #import "SelectPackagesViewController.h"
 #import "SBJson.h"
+#import "ReadJson.h"
+#import "SelectPackages.h"
 
 @interface SelectPackagesViewController ()
 
@@ -35,16 +37,10 @@
     [super viewDidLoad];
 
     //读取 users.json
+    ReadJson *readJson = [[ReadJson alloc] init];
+    NSMutableDictionary *suitMenuDic = [readJson readJosonwithFileName:@"foods"];
     
-    NSString *userPath = [[NSBundle mainBundle] pathForResource:@"foods" ofType:@"json"];
-    NSString *jsonString = [NSString stringWithContentsOfFile:userPath encoding:NSUTF8StringEncoding error:NULL];
-    
-    self.packagesNameArray = [[NSMutableArray alloc] initWithCapacity:10];
-    SBJsonParser * parser = [[SBJsonParser alloc] init];
-    NSError * error = nil;
-    NSMutableDictionary *suitMenuDic = [parser objectWithString:jsonString error:&error];
     NSArray *suitMenuArray1 =  [suitMenuDic objectForKey:self.title];
-    
     for (NSDictionary *name in suitMenuArray1) {
         [self.packagesNameArray addObject:[name objectForKey:@"name"]];
         [self.packagesPriceArray addObject:[name objectForKey:@"price"]];
@@ -54,8 +50,6 @@
 
 - (void)didReceiveMemoryWarning
 {
-    [packagesPriceArray release];
-    [packagesNameArray release];
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -66,7 +60,6 @@
     UIView *view = [UIView new];
     view.backgroundColor = [UIColor clearColor];
     [tableView setTableFooterView:view];
-    [view release];
 }
 
 #pragma mark - Table view data source
@@ -82,28 +75,16 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SuitMenuIdentifier];
     
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SuitMenuIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SuitMenuIdentifier];
     }
     
-    // Configure the cell...
     NSUInteger row = [indexPath row];
-    CGRect nameLabelRect = CGRectMake(0, 8, 200, 25);
-    UILabel *nameLabel = [[UILabel alloc] initWithFrame:nameLabelRect];
-    nameLabel.text = [self.packagesNameArray objectAtIndex:row];
-    nameLabel.font = [UIFont boldSystemFontOfSize:20];
-    [cell.contentView addSubview:nameLabel];
-    [nameLabel release];
+    NSString *name = [self.packagesNameArray objectAtIndex:row];
+    NSString *price = [self.packagesPriceArray objectAtIndex:row];
+    SelectPackages *selectView = [[SelectPackages alloc] initWithFrame:CGRectMake(0, 0, 320, 100) andName:name andPrice:price];
+    [cell.contentView addSubview:selectView];
     
-    CGRect priceLabelRect = CGRectMake(230, 5, 70, 15);
-    UILabel *priceLabel = [[UILabel alloc] initWithFrame:priceLabelRect];
-    NSString *price = [NSString stringWithFormat:@"¥ %@",[self.packagesPriceArray objectAtIndex:row]];
-    priceLabel.text = price;
-    priceLabel.font = [UIFont boldSystemFontOfSize:14];
-    [cell.contentView addSubview:priceLabel];
-    [priceLabel release];
-    
-    cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-    NSLog(@"%@",[self.packagesNameArray objectAtIndex:row]);
+    cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;    
     return cell;
 }
 
@@ -115,7 +96,6 @@
         NSUInteger row = [indexPath row];
         NSString *packagesName = [self.packagesNameArray objectAtIndex:row];
         NSString *price = [self.packagesPriceArray objectAtIndex:row];
-        NSLog(@"suitMentViewController menuName %@ and price %@", packagesName,price);
         [self.delegate selectPackagesName:packagesName andPrice:price];
     }
     [self.navigationController popViewControllerAnimated:YES];

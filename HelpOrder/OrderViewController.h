@@ -19,7 +19,7 @@
 
 @end
 
-@interface OrderViewController : UIViewController <SelectPeopleTableViewControllerDelegate,SelectRestaurantTableViewControllerDelegate,SelectPackagesViewControllerDelegate,UITextFieldDelegate>
+@interface OrderViewController : UIViewController <SelectPeopleTableViewControllerDelegate,SelectRestaurantTableViewControllerDelegate,SelectPackagesViewControllerDelegate>
 
 {
     NSMutableArray *orderArray;

@@ -10,4 +10,6 @@
 
 @interface RootView : UIView
 
+-(id)initWithButtonTarget:(id)aTarget andSEL:(SEL)aSEL andOtherTarget:(id)otherTarget andOtherSEL:(SEL)otherSEL withFrame:(CGRect)frame;
+
 @end

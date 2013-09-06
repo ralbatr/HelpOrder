@@ -27,13 +27,5 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [peopleName release];
-    [restaurantName release];
-    [price release];
-    [packagesName release];
-    [super dealloc];
-}
 
 @end

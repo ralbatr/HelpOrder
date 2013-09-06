@@ -10,22 +10,35 @@
 
 @implementation RootView
 
-- (id)initWithFrame:(CGRect)frame
+-(id)initWithButtonTarget:(id)aTarget andSEL:(SEL)aSEL andOtherTarget:(id)otherTarget andOtherSEL:(SEL)otherSEL withFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        [self ShowButtonWithTarget:aTarget andSEL:aSEL andOtherTarget:otherTarget andOtherSEL:otherSEL ];
     }
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+
+
+- (void)ShowButtonWithTarget:(id)aTarget andSEL:(SEL)aSEL andOtherTarget:(id)otherTarget andOtherSEL:(SEL)otherSEL 
 {
-    // Drawing code
+    // 帮订餐 按钮
+    UIButton *orderButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    orderButton.frame = CGRectMake(20, 40, 280, 40);
+    [orderButton setTitle:@"帮订餐" forState:UIControlStateNormal];
+    [orderButton addTarget:aTarget action:aSEL forControlEvents:UIControlEventTouchUpInside];
+    orderButton.tag = 202;
+    [self addSubview:orderButton];
+    // 看清单 按钮
+    UIButton *checkButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    checkButton.frame = CGRectMake(20, 100, 280, 40);
+    [checkButton setTitle:@"看订单" forState:UIControlStateNormal];
+    [checkButton addTarget:otherTarget action:otherSEL forControlEvents:UIControlEventTouchUpInside];
+    checkButton.tag = 201;
+    //初始时，不可以使用查“看订单”按钮
+    [checkButton setEnabled:NO];
+    [self addSubview:checkButton];
 }
-*/
 
 @end

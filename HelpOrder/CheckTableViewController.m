@@ -9,6 +9,8 @@
 #import "CheckTableViewController.h"
 #import "SBJson.h"
 #import "OrderDetail.h"
+#import "CheckTableView.h"
+#import "ReadJson.h"
 
 @interface CheckTableViewController ()
 
@@ -35,70 +37,49 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    //读取 users.json
     
-    NSString *userPath = [[NSBundle mainBundle] pathForResource:@"users" ofType:@"json"];
-    NSString *jsonString = [NSString stringWithContentsOfFile:userPath encoding:NSUTF8StringEncoding error:NULL];
-    
-    SBJsonParser * parser = [[SBJsonParser alloc] init];
-    NSError * error = nil;
-    NSMutableArray *AllPeopleNameArray = [parser objectWithString:jsonString error:&error];
-    self.peopleNoOrderArray = AllPeopleNameArray;
-    int allPeopleLength = [AllPeopleNameArray count];
+    int allPeopleLength = [self readJson];
     int orderPeopleLength = [self.orderMutableArray count];
-
+    // 找出 没有 点餐的人
     for (int i = 0; i < orderPeopleLength; i++) {
-        OrderDetail *orderDetail = [[OrderDetail alloc] autorelease];
+        OrderDetail *orderDetail = [[OrderDetail alloc] init];
         orderDetail = [self.orderMutableArray objectAtIndex:i];
         NSDictionary *dic = [NSDictionary dictionaryWithObject:orderDetail.peopleName forKey:@"name"];
         [peopleNoOrderArray removeObject:dic];
-        NSLog(@"%@",orderDetail.peopleName);
-    }    
+    }
+    CheckTableView *checkTableView = [[CheckTableView alloc] init];
+    [checkTableView showStatusViewWithOrderPeopleLength:orderPeopleLength andNoorderLength:(allPeopleLength - orderPeopleLength) andTotalPrice:[self totalPrice]];    
+    [self.view addSubview:checkTableView];
+    //隐藏 多余的 白线
+    [self setExtraCellLineHidden:self.tableView];
+}
+
+- (int)readJson
+{
+    //读取 users.json
+    ReadJson *readJson = [[ReadJson alloc] init];
+    NSMutableArray *AllPeopleNameArray = [readJson readJosonwithFileName:@"users"];
     
+    self.peopleNoOrderArray = AllPeopleNameArray;
+    return [AllPeopleNameArray count];
+}
+
+- (float)totalPrice
+{
+    //计算 总价
     float totalPrice =  0;
+    int orderPeopleLength = [self.orderMutableArray count];
     for (int j= 0; j < orderPeopleLength; j++) {
-        OrderDetail *orderDetail = [[OrderDetail alloc] autorelease];
+        OrderDetail *orderDetail = [[OrderDetail alloc] init];
         orderDetail = [self.orderMutableArray objectAtIndex:j];
         totalPrice += [orderDetail.price floatValue];
     }
-    
-    //    [self.navigationController setToolbarHidden:NO];
-    UIToolbar *statusView = [[UIToolbar alloc] init];
-    statusView.frame = CGRectMake(0,380,320,44);
-    statusView.backgroundColor = [UIColor blackColor];
-    statusView.barStyle = UIBarStyleBlack;
-    [self.view addSubview:statusView];
-    [statusView release];
-    
-    UILabel *statusLabel = [[UILabel alloc] init];
-    statusLabel.frame = CGRectMake(10, 380, 320, 45);
-    statusLabel.textAlignment = NSTextAlignmentCenter;
-    statusLabel.textColor = [UIColor whiteColor];
-    statusLabel.backgroundColor = [UIColor clearColor];
-    statusLabel.font = [UIFont boldSystemFontOfSize:18];
-    //    NSString *statusString = [[NSString stringWithFormat:@"%d人已定，%d人未定",orderPeopleLength,allPeopleLength - orderPeopleLength];
-    NSString *statusString = [NSString stringWithFormat:@"%d人已定,%d人未定,总计%.2f元",orderPeopleLength,allPeopleLength - orderPeopleLength,totalPrice];
-    statusLabel.text = statusString;
-    statusLabel.tag = 301;
-    [self.view addSubview:statusLabel];
-    //    [self.navigationController set]
-    [statusLabel release];
-    [self setExtraCellLineHidden:self.tableView];
+    return totalPrice;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)dealloc
-{
-    [orderMutableArray release];
-    [peopleNoOrderArray release];
-    [sectionArray release];
-    [super dealloc];
 }
 
 #pragma mark - 自定义方法
@@ -107,7 +88,6 @@
     UIView *view = [UIView new];
     view.backgroundColor = [UIColor clearColor];
     [tableView setTableFooterView:view];
-    [view release];
 }
 
 #pragma mark - Table view data source
@@ -118,7 +98,6 @@
 }
 
 //分区内的行数
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
@@ -128,72 +107,47 @@
         return [self.peopleNoOrderArray count];
 }
 
-//
-
+//具体的tableview数据
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUInteger section = [indexPath section];
     NSUInteger row = [indexPath row];
-    
     static NSString *CheckCellIdentifier = @"CheckCellIdentifier";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CheckCellIdentifier];
-    
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CheckCellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CheckCellIdentifier];
     }
-    
-    // Configure the cell...
+    //section为0 为订餐
     if (section == 0) {
-        OrderDetail *orderDatil = [[OrderDetail alloc] autorelease];
-        orderDatil = [self.orderMutableArray objectAtIndex:row];
-        
-        CGRect nameLabelRect = CGRectMake(3, 5, 150, 18);
-        UILabel *nameLabel = [[UILabel alloc] initWithFrame:nameLabelRect];
-        nameLabel.text = orderDatil.peopleName;
-        nameLabel.font = [UIFont boldSystemFontOfSize:20];
-        [cell.contentView addSubview:nameLabel];
-        [nameLabel release];
-        
-        CGRect restaurantLabelRect = CGRectMake(3, 25, 150, 14);
-        UILabel *restaurantLabel = [[UILabel alloc] initWithFrame:restaurantLabelRect];
-        NSString *restaurantAndFoodString = [NSString stringWithFormat:@"%@ %@",orderDatil.restaurantName,orderDatil.packagesName];
-        restaurantLabel.text = restaurantAndFoodString;
-        restaurantLabel.font = [UIFont boldSystemFontOfSize:14];
-        [cell.contentView addSubview:restaurantLabel];
-        [restaurantLabel release];
-        
-        CGRect priceLabelRect = CGRectMake(230, 5, 70, 15);
-        UILabel *priceLabel = [[UILabel alloc] initWithFrame:priceLabelRect];
-        NSString *price = [NSString stringWithFormat:@"¥ %.2f",[orderDatil.price floatValue]];
-        priceLabel.text = price;
-        if ( [orderDatil.price intValue] > 12 ) {
-            priceLabel.textColor = [UIColor redColor];
-            CGRect exceedPriceLabelRect = CGRectMake(230, 25, 70, 15);
-            UILabel *exceedPriceLabel = [[UILabel alloc] initWithFrame:exceedPriceLabelRect];
-            NSString *exceedPrice = [NSString stringWithFormat:@"¥ %.2f",[orderDatil.price floatValue] - 12];
-            exceedPriceLabel.text = exceedPrice;
-            exceedPriceLabel.textColor = [UIColor redColor];
-            exceedPriceLabel.font = [UIFont boldSystemFontOfSize:14];
-            [cell.contentView addSubview:exceedPriceLabel];
-        }
-        priceLabel.font = [UIFont boldSystemFontOfSize:14];
-        [cell.contentView addSubview:priceLabel];
-        [priceLabel release];
+        CheckTableView *checkTableView;
+        [cell.contentView addSubview:[self exceedView:checkTableView andRow:row]];
     }
     //没有订餐的人 
     if (section == 1) {
-        NSLog(@"%@",[[self.peopleNoOrderArray objectAtIndex:row] objectForKey:@"name"]);
         cell.textLabel.text = [[self.peopleNoOrderArray objectAtIndex:row] objectForKey:@"name"];
     }
-    
     return cell;
 }
 
+- (UIView *)exceedView:(UIView *)checkTableView andRow:(int)row
+{
+    OrderDetail *orderDatil = [[OrderDetail alloc] init];
+    orderDatil = [self.orderMutableArray objectAtIndex:row];
+    float price = [orderDatil.price floatValue];
+    if (price <= 12) {
+        checkTableView = [[CheckTableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) andPeopleName:orderDatil.peopleName andRestaurantName:orderDatil.restaurantName andPackagesName:orderDatil.packagesName andPrice:price andPriceColor:[UIColor blackColor] andExceedPriceColor:[UIColor clearColor]];
+    }
+    else
+    {
+        checkTableView = [[CheckTableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) andPeopleName:orderDatil.peopleName andRestaurantName:orderDatil.restaurantName andPackagesName:orderDatil.packagesName andPrice:price andPriceColor:[UIColor redColor] andExceedPriceColor:[UIColor redColor]];
+    }
+    return checkTableView;
+}
 //section的题目
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     
-    NSString *titleString = [[[NSString alloc] init] autorelease];
+    NSString *titleString = [[NSString alloc] init];
     if (section == 0) {
         titleString = [NSString stringWithFormat:@"%d人已经订餐",[self.orderMutableArray count]];
     }
@@ -203,7 +157,6 @@
 }
 
 #pragma mark - Table view delegate
-
 //更改表的行高
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
