@@ -27,5 +27,26 @@
     return self;
 }
 
+- (OrderDetail *)DicToObject:(NSDictionary *)dictionary
+{
+    OrderDetail *orderDetail = [[OrderDetail alloc] init];
+    orderDetail.peopleName = [dictionary objectForKey:@"PeopleName"];
+    orderDetail.packagesName = [dictionary objectForKey:@"PackagesName"];
+    orderDetail.restaurantName = [dictionary objectForKey:@"RestaurantName"];
+    orderDetail.price = [dictionary objectForKey:@"price"];
+    
+    return orderDetail;
+}
+
+- (NSDictionary *)ObjectToDic:(OrderDetail *)orderDetail
+{
+    NSDictionary *dictonary = [[NSMutableDictionary alloc] init];
+    [dictonary setValue:orderDetail.peopleName forKey:@"PeopleName"];
+    [dictonary setValue:orderDetail.restaurantName forKey:@"RestaurantName"];
+    [dictonary setValue:orderDetail.packagesName forKey:@"PackagesName"];
+    [dictonary setValue:orderDetail.price forKey:@"price"];
+    
+    return dictonary;
+}
 
 @end

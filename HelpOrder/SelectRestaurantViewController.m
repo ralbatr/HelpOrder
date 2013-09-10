@@ -22,7 +22,7 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        self.restaurantArray = [[NSMutableArray alloc] initWithCapacity:10];
+        self.restaurantArray = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -30,12 +30,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = @"选餐厅";
     //读取 restaurants.json
     ReadJson *readJson = [[ReadJson alloc] init];
     NSMutableArray *restaurantArray1 = [readJson readJosonwithFileName:@"restaurants"];
     
-    int length = [restaurantArray1 count];
-    for (int i = 0; i < length; i++) {
+    for (int i = 0; i < [restaurantArray1 count]; i++) {
         [self.restaurantArray addObject:[[restaurantArray1 objectAtIndex:i] objectForKey:@"name"]];
     }
     [self setExtraCellLineHidden:self.tableView];
@@ -44,7 +44,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - 自定义的方法

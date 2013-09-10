@@ -29,7 +29,6 @@
         self.orderMutableArray = [[NSMutableArray alloc] init];
         self.sectionArray = [[NSArray alloc] init];
         self.peopleNoOrderArray = [[NSMutableArray alloc] init];
-        self.title = @"订单显示";
     }
     return self;
 }
@@ -37,23 +36,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = @"订单显示";
+    //获取 详细订单 
+    [self getOrderMutableArray];
     
     int allPeopleLength = [self readJson];
     int orderPeopleLength = [self.orderMutableArray count];
     // 找出 没有 点餐的人
-    for (int i = 0; i < orderPeopleLength; i++) {
-        OrderDetail *orderDetail = [[OrderDetail alloc] init];
-        orderDetail = [self.orderMutableArray objectAtIndex:i];
-        NSDictionary *dic = [NSDictionary dictionaryWithObject:orderDetail.peopleName forKey:@"name"];
-        [peopleNoOrderArray removeObject:dic];
-    }
+    [self findNoOrderPeople];
+    //view
     CheckTableView *checkTableView = [[CheckTableView alloc] init];
     [checkTableView showStatusViewWithOrderPeopleLength:orderPeopleLength andNoorderLength:(allPeopleLength - orderPeopleLength) andTotalPrice:[self totalPrice]];    
     [self.view addSubview:checkTableView];
-    //隐藏 多余的 白线
-    [self setExtraCellLineHidden:self.tableView];
+    //隐藏 TableView的多余的 白线
+    [self setExtraCellLineHidden:self.tableView];    
 }
-
+//获取所有人名的个数
 - (int)readJson
 {
     //读取 users.json
@@ -62,6 +60,29 @@
     
     self.peopleNoOrderArray = AllPeopleNameArray;
     return [AllPeopleNameArray count];
+}
+
+- (void)findNoOrderPeople
+{
+    for (int i = 0; i < [self.orderMutableArray count]; i++) {
+        OrderDetail *orderDetail = [[OrderDetail alloc] init];
+        orderDetail = [self.orderMutableArray objectAtIndex:i];
+        NSDictionary *dic = [NSDictionary dictionaryWithObject:orderDetail.peopleName forKey:@"name"];
+        [peopleNoOrderArray removeObject:dic];
+    }
+}
+
+- (void)getOrderMutableArray
+{
+    ReadJson *readJsonFilePath = [[ReadJson alloc] init];
+    NSString *filePath = [readJsonFilePath jsonFilePath:@"orderDetail.json"];
+    NSString *fileString = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+    SBJsonParser * parser = [[SBJsonParser alloc] init];
+    NSArray *array = [parser objectWithString:fileString error:nil];
+    for (int i = 0; i < [array count]; i++) {
+        OrderDetail *order = [[OrderDetail alloc] init];
+        [orderMutableArray addObject:[order DicToObject:[array objectAtIndex:i]]];
+    }
 }
 
 - (float)totalPrice
@@ -135,11 +156,11 @@
     orderDatil = [self.orderMutableArray objectAtIndex:row];
     float price = [orderDatil.price floatValue];
     if (price <= 12) {
-        checkTableView = [[CheckTableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) andPeopleName:orderDatil.peopleName andRestaurantName:orderDatil.restaurantName andPackagesName:orderDatil.packagesName andPrice:price andPriceColor:[UIColor blackColor] andExceedPriceColor:[UIColor clearColor]];
+        checkTableView = [[CheckTableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) andOrderDetail:orderDatil andPriceColor:[UIColor blackColor] andExceedPriceColor:[UIColor clearColor]];
     }
     else
     {
-        checkTableView = [[CheckTableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) andPeopleName:orderDatil.peopleName andRestaurantName:orderDatil.restaurantName andPackagesName:orderDatil.packagesName andPrice:price andPriceColor:[UIColor redColor] andExceedPriceColor:[UIColor redColor]];
+        checkTableView = [[CheckTableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) andOrderDetail:orderDatil andPriceColor:[UIColor redColor] andExceedPriceColor:[UIColor redColor]];
     }
     return checkTableView;
 }
@@ -160,7 +181,7 @@
 //更改表的行高
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 50;
+    return LineHight;
 }
 
 @end

@@ -11,9 +11,9 @@
 
 @interface RootViewController : UIViewController <OrderViewControllerDelegate>
 {
-    NSMutableArray *orderArray;
+//    NSMutableArray *orderArray;
 }
 
-@property (nonatomic,retain) NSMutableArray *orderArray;
+//@property (nonatomic,retain) NSMutableArray *orderArray;
 
 @end

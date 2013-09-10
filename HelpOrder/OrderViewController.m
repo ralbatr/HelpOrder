@@ -10,6 +10,7 @@
 #import "OrderView.h"
 #import "OrderDetail.h"
 #import "SBJson.h"
+#import "ReadJson.h"
 
 @interface OrderViewController ()
 
@@ -24,7 +25,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = @"订 餐";
         self.orderArray = [[NSMutableArray alloc] initWithCapacity:10];
     }
     return self;
@@ -34,6 +34,7 @@
 {
     [super viewDidLoad];
     //加载 view 显示
+    self.title = @"订 餐";
     OrderView *orderView = [[OrderView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) andTarget:self andPersonSEL:@selector(personMethod) andRastauranSEL:@selector(rastauranMethod) andPackagesSEL:@selector(packagesMethod) andAffirmSEL:@selector(affirmMethod)];
     [self.view addSubview:orderView];
     //价格
@@ -98,46 +99,42 @@
     UITextField *packagesNameTextField = (UITextField *)[self.view viewWithTag:103];
     UILabel *priceLabel = (UILabel *)[self.view viewWithTag:104];
     NSString *personNameString = nameTextField.text;    
-    //要往沙盒中写数据获取的沙盒目录
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *plistPath=[paths objectAtIndex:0];
-    //取得完整的文件名
-    NSString *fileName=[plistPath stringByAppendingPathComponent:@"orderDetail.json"];
+    ReadJson *readJsonFilePath = [[ReadJson alloc] init];
+    NSString *filePath = [readJsonFilePath jsonFilePath:@"orderDetail.json"];
     //把 再次订餐的人 删除原来的
-    [self resetArrayWithFileName:fileName andPeopleName:personNameString];
+    [self resetArrayWithFileName:filePath andPeopleName:personNameString];
     //把这个人的信息，写到数组中
     OrderDetail *orderDetail = [[OrderDetail alloc] initWithPeopleName:personNameString andRestaurantName:restaurantTextField.text andPackagesName:packagesNameTextField.text andPrice:priceLabel.text];
-    [orderArray addObject:orderDetail];
-    //写到json文件中
-    [self writeJsonWithFileName:fileName];
+    [orderArray addObject:orderDetail]; 
+//    写到json文件中
+    [self writeJsonWithFileName:[self fileManager]];
     //重置
     [self reset];
     //调用代理
     if ([self.delegate respondsToSelector:@selector(orderDetail:)]) {
-        [self.delegate orderDetail:orderArray];
+        [self.delegate orderDetail:[orderArray count]];
     }
 }
-
-- (void)writeJsonWithFileName:(NSString *)fileName
+//整理文件
+- (NSMutableArray *)fileManager
 {
-    //把数组重新写到 orderDetail.json
     NSMutableArray *array = [[NSMutableArray alloc] init];
-    int orderLength = [orderArray count];
-    for (int i = 0 ; i < orderLength ; i++) {
+    for (int i = 0 ; i < [orderArray count] ; i++) {
         OrderDetail *orderDetailWrite = [[OrderDetail alloc] init];
         orderDetailWrite = [orderArray objectAtIndex:i];
         NSDictionary *dictonary = [[NSMutableDictionary alloc] init];
-        [dictonary setValue:orderDetailWrite.peopleName forKey:@"PeopleName"];
-        [dictonary setValue:orderDetailWrite.restaurantName forKey:@"RestaurantName"];
-        [dictonary setValue:orderDetailWrite.packagesName forKey:@"PackagesName"];
-        [dictonary setValue:orderDetailWrite.price forKey:@"price"];
+        dictonary = [orderDetailWrite ObjectToDic:orderDetailWrite];
         [array addObject:dictonary];
     }
-    //转换json格式
-    SBJsonWriter *writer = [[SBJsonWriter alloc] init];
-    NSString *value = [writer stringWithObject:array];
-    //创建并写入文件
-    [value writeToFile:fileName atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    return array;
+}
+
+- (void)writeJsonWithFileName:(NSMutableArray *)array
+{
+    //把数组重新写到 orderDetail.json
+    ReadJson *writeJsonFilePath = [[ReadJson alloc] init];
+    NSString *filePath = [writeJsonFilePath jsonFilePath:@"orderDetail.json"];
+    [writeJsonFilePath jsonWrite:array andFileName:filePath];
 }
 
 - (void)resetArrayWithFileName:(NSString *)fileName andPeopleName:(NSString *)personNameString
@@ -157,16 +154,11 @@
 
 - (void)getOrderPeople:(NSMutableArray *)orderDetailArray
 {
-    int orderlength = [orderDetailArray count];
-    for (int i = 0; i < orderlength; i++) {
+    for (int i = 0; i < [orderDetailArray count]; i++) {
         OrderDetail *orderDetailAdd = [[OrderDetail alloc] init];
-        orderDetailAdd.peopleName = [[orderDetailArray objectAtIndex:i] objectForKey:@"PeopleName"];
-        orderDetailAdd.packagesName = [[orderDetailArray objectAtIndex:i] objectForKey:@"PackagesName"];
-        orderDetailAdd.restaurantName = [[orderDetailArray objectAtIndex:i] objectForKey:@"RestaurantName"];
-        orderDetailAdd.price = [[orderDetailArray objectAtIndex:i] objectForKey:@"price"];
+        orderDetailAdd = [orderDetailAdd DicToObject:[orderDetailArray objectAtIndex:i]];
         [self.orderArray addObject:orderDetailAdd];
     }
-
 }
 
 - (void)removeOrderPeople:(NSString *)personNameString
@@ -195,12 +187,6 @@
     UIButton *affirmButton = (UIButton *)[self.view viewWithTag:105];
     [affirmButton setEnabled:NO];
 }
-//关闭软键盘
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    [self.view endEditing:YES];
-}
-
 #pragma mark - delegate
 - (void)selectPeopleName:(NSString *)name
 {

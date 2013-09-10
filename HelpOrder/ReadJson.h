@@ -14,4 +14,8 @@
 
 - (void)writeJsonWithJsonName:(NSString *)jsonName andValue:(NSString *)string;
 
+- (NSString *)jsonFilePath:(NSString *)fileName;
+
+- (void)jsonWrite:(id)data andFileName:(NSString *)fileName;
+
 @end

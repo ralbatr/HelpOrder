@@ -10,12 +10,13 @@
 
 @implementation CheckTableView
 
-- (id)initWithFrame:(CGRect)frame andPeopleName:(NSString *)peopleName andRestaurantName:(NSString *)restaurantName andPackagesName:(NSString *)packagesName andPrice:(float)price andPriceColor:(UIColor *)priceColor andExceedPriceColor:(UIColor *)exceedPriceColor
+- (id)initWithFrame:(CGRect)frame andOrderDetail:(OrderDetail *)orderDetail andPriceColor:(UIColor *)priceColor andExceedPriceColor:(UIColor *)exceedPriceColor
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self showCheckTableVieWithPeopleName:peopleName andRestaurantName:restaurantName andPackagesName:packagesName];
-        [self showPriceLableWithPrice:price andPriceColor:priceColor andExceedPriceColor:exceedPriceColor];
+        OrderDetail *_orderDetail = orderDetail;
+        [self showCheckTableVieWithPeopleName:_orderDetail.peopleName andRestaurantName:_orderDetail.restaurantName andPackagesName:_orderDetail.packagesName];
+        [self showPriceLableWithPrice:[_orderDetail.price floatValue] andPriceColor:priceColor andExceedPriceColor:exceedPriceColor];
     }
     return self;
 }

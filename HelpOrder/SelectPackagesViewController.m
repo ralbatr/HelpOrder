@@ -25,9 +25,8 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        self.packagesNameArray = [[NSMutableArray alloc] initWithCapacity:10];
-        self.packagesPriceArray = [[NSMutableArray alloc] initWithCapacity:10];
-        self.title = @"选套餐";
+        self.packagesNameArray = [[NSMutableArray alloc] init];
+        self.packagesPriceArray = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -35,7 +34,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     //读取 users.json
     ReadJson *readJson = [[ReadJson alloc] init];
     NSMutableDictionary *suitMenuDic = [readJson readJosonwithFileName:@"foods"];
@@ -51,7 +50,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - 子定义方法

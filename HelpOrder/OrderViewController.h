@@ -15,18 +15,20 @@
 
 @optional
 
-- (void)orderDetail:(NSMutableArray *)orderDetail;
+- (void)orderDetail:(NSInteger)orderDetailCount;
 
 @end
 
 @interface OrderViewController : UIViewController <SelectPeopleTableViewControllerDelegate,SelectRestaurantTableViewControllerDelegate,SelectPackagesViewControllerDelegate>
 
 {
-    NSMutableArray *orderArray;
+    NSMutableArray *orderArray;//完整的订单
 }
 
 @property (nonatomic,retain) NSMutableArray *orderArray;
 @property (nonatomic,assign) id <OrderViewControllerDelegate> delegate;
+
+- (void)resetArrayWithFileName:(NSString *)fileName andPeopleName:(NSString *)personNameString;
 
 @end
 

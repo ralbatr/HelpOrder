@@ -23,13 +23,13 @@
 {
     CGRect nameLabelRect = CGRectMake(0, 8, 200, 25);
     UILabel *nameLabel = [[UILabel alloc] initWithFrame:nameLabelRect];
-    nameLabel.text = name;//[self.packagesNameArray objectAtIndex:row];
+    nameLabel.text = name;
     nameLabel.font = [UIFont boldSystemFontOfSize:20];
     [self addSubview:nameLabel];
     
     CGRect priceLabelRect = CGRectMake(230, 5, 70, 15);
     UILabel *priceLabel = [[UILabel alloc] initWithFrame:priceLabelRect];
-    NSString *priceString = [NSString stringWithFormat:@"¥ %@",price];//[self.packagesPriceArray objectAtIndex:row]];
+    NSString *priceString = [NSString stringWithFormat:@"¥ %@",price];
     priceLabel.text = priceString;
     priceLabel.font = [UIFont boldSystemFontOfSize:14];
     [self addSubview:priceLabel];

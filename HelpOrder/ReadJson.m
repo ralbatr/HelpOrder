@@ -32,4 +32,24 @@
     [string writeToFile:fileName atomically:YES encoding:NSUTF8StringEncoding error:nil];
 }
 
+- (NSString *)jsonFilePath:(NSString *)fileName
+{
+    //要往沙盒中写数据获取的沙盒目录
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *plistPath=[paths objectAtIndex:0];
+    //取得完整的文件名
+    NSString *filePath=[plistPath stringByAppendingPathComponent:fileName];
+    return filePath;
+}
+
+- (void)jsonWrite:(id)data andFileName:(NSString *)fileName
+{
+    //转换json格式
+    SBJsonWriter *writer = [[SBJsonWriter alloc] init];
+    NSString *value = [writer stringWithObject:data];
+    //创建并写入文件
+    [value writeToFile:fileName atomically:YES encoding:NSUTF8StringEncoding error:nil];
+}
+
+
 @end

@@ -23,4 +23,8 @@
 
 - (id)initWithPeopleName:(NSString *)peopleName andRestaurantName:(NSString *)restaurantName andPackagesName:(NSString *)packagesName andPrice:(id)price;
 
+- (OrderDetail *)DicToObject:(NSDictionary *)dictionary;
+
+- (NSDictionary *)ObjectToDic:(OrderDetail *)orderDetail;
+
 @end

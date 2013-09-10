@@ -23,7 +23,6 @@
     self = [super initWithStyle:style];
     if (self) {
         self.peopleArray = [[NSMutableArray alloc] initWithCapacity:10];
-        self.title = @"选 人";
     }
     return self;
 }
@@ -32,11 +31,11 @@
 {
     [super viewDidLoad];
     
+    self.title = @"选 人";    
     ReadJson *readJson = [[ReadJson alloc] init];
     NSMutableArray *peopleArray1 = [readJson readJosonwithFileName:@"users"];
     
-    int length = [peopleArray1 count];
-    for (int i = 0; i < length; i++) {
+    for (int i = 0; i < [peopleArray1 count]; i++) {
         [self.peopleArray addObject:[[peopleArray1 objectAtIndex:i] objectForKey:@"name"]];
     }
     //隐藏ViewTable的白线
@@ -62,7 +61,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
     return [self.peopleArray count];
 }
 
